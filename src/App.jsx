@@ -4,8 +4,31 @@ import viteLogo from './assets/vite.svg'
 import car from './assets/car-2901.svg'
 import './App.css'
 
+function ProgressBar({ title, currentBar, fullBar }) {
+
+  return (
+
+    <div className='progress-bar'>
+      <label>{title} </label>
+      <progress value={currentBar} max={fullBar}></progress>
+      <span> {currentBar} out of {fullBar}</span>
+    </div >
+  )
+}
+
 function App() {
-  const [count, setCount] = useState(0)
+  const [drives, setDrives] = useState(
+    [
+      { id: 1, date: new Date(), hours: 5, isNight: false },
+      { id: 2, date: new Date(), hours: 5, isNight: true },
+      { id: 3, date: new Date(), hours: 5, isNight: false }
+    ])
+
+  const totalHours = drives.reduce((acc, drive) => acc + drive.hours, 0);
+
+  const nightHours = drives
+    .filter((drive) => drive.isNight)
+    .reduce((acc, drive) => acc + drive.hours, 0);
 
   return (
     <>
@@ -15,6 +38,9 @@ function App() {
         </div>
         <div>
           <h1>🎉You Did It 🎉</h1>
+          <h2>You are ready for your drive test!</h2>
+          <ProgressBar title={'Total Driving Hours:'} currentBar={totalHours} fullBar={50}></ProgressBar>
+          <ProgressBar title={'Nighttime Driving Hours:'} currentBar={nightHours} fullBar={10}></ProgressBar>
         </div>
         {/* <button
           type="button"
@@ -23,7 +49,7 @@ function App() {
         >
           Count is {count}
         </button> */}
-      </section>
+      </section >
 
       <div className="ticks"></div>
 
