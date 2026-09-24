@@ -1,16 +1,24 @@
-# React + Vite
+# Overview
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Behind The Wheel is a website to track the number of hours a person has driven 
+to determine their eligibility to take a behind the wheel test at the DMV
+for their drivers license.
 
-Currently, two official plugins are available:
+# How To Run It
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+To run this project, clone the repository and then install dependencies using "npm i".
+Then use npm run dev to run the project locally.
 
-## React Compiler
+# My Contribution
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+All the code is mine. I did use React with Vite.
 
-## Expanding the ESLint configuration
+# What I Learned
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+One challenge I had when building out this project was passing and accepting props.
+I learned that some of my functions needed to pass and or accept props in the form of 
+objects rather than simply individual props.
+
+# References
+
+I watched the following tutorial: https://youtu.be/qe3mrBmeno8?si=_m2Jgl5YfD6qiNWc
