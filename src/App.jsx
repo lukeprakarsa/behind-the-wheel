@@ -1,6 +1,4 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
 import car from './assets/car-2901.svg'
 import './App.css'
 
@@ -80,18 +78,11 @@ function App() {
           <img src={car} className="base" width="170" height="179" alt="" />
         </div>
         <div>
-          {isComplete ? <h1>🎉You Did It 🎉</h1> : <h1>You Can Do It</h1>}
+          {isComplete ? <h1>🎉You Did It 🎉</h1> : <h1>Log Your Hours</h1>}
           {isComplete ? <h2>You are ready for your drive test!</h2> : <h2></h2>}
           <ProgressBar title={'Total Driving Hours:'} currentBar={totalHours} fullBar={50}></ProgressBar>
           <ProgressBar title={'Nighttime Driving Hours:'} currentBar={nightHours} fullBar={10}></ProgressBar>
         </div>
-        {/* <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button> */}
       </section >
 
       <div className="ticks"></div>
@@ -99,12 +90,11 @@ function App() {
       <section id="next-steps">
         <div id="docs">
           <h2>Log Your Hours</h2>
-          {/* <p>Your questions, answered</p> */}
           <DriveForm onAddDrive={addDrive}></DriveForm>
         </div>
         <div id="social">
           <h2>View Your Logs</h2>
-          <DriveList drives={drives}></DriveList>
+          {drives.length == 0 ? 'No Drives Logged Yet' : <DriveList drives={drives}></DriveList>}
         </div>
       </section>
 
