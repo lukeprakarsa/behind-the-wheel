@@ -16,6 +16,40 @@ function ProgressBar({ title, currentBar, fullBar }) {
   )
 }
 
+function DriveForm({ onAddDrive }) {
+
+  const [date, setDate] = useState("");
+  const [hours, setHours] = useState("");
+  const [isNight, setIsNight] = useState(false);
+
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    onAddDrive({ id: Date.now(), date: date, hours: Number(hours), isNight: isNight });
+    setDate("");
+    setHours("");
+    setIsNight(false);
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <label>
+        Date
+        <input type="date" value={date} onChange={(event) => setDate(event.target.value)} />
+      </label>
+      <label>
+        Hours
+        <input type="number" min="0.5" step="0.5" value={hours} onChange={(event) => setHours(event.target.value)} />
+      </label>
+      <label>
+        Night Drive?
+        <input type="checkbox" checked={isNight} onChange={(event) => setIsNight(event.target.checked)} />
+      </label>
+      <button type="submit">Add drive</button>
+    </form>
+  );
+}
+
 function App() {
   const [drives, setDrives] = useState(
     [
@@ -30,6 +64,12 @@ function App() {
     .filter((drive) => drive.isNight)
     .reduce((acc, drive) => acc + drive.hours, 0);
 
+  const isComplete = (totalHours >= 50) && (nightHours >= 10)
+
+  function addDrive(drive) {
+    setDrives([...drives, drive]);
+  }
+
   return (
     <>
       <section id="center">
@@ -37,8 +77,8 @@ function App() {
           <img src={car} className="base" width="170" height="179" alt="" />
         </div>
         <div>
-          <h1>🎉You Did It 🎉</h1>
-          <h2>You are ready for your drive test!</h2>
+          {isComplete ? <h1>🎉You Did It 🎉</h1> : <h1>You Can Do It</h1>}
+          {isComplete ? <h2>You are ready for your drive test!</h2> : <h2></h2>}
           <ProgressBar title={'Total Driving Hours:'} currentBar={totalHours} fullBar={50}></ProgressBar>
           <ProgressBar title={'Nighttime Driving Hours:'} currentBar={nightHours} fullBar={10}></ProgressBar>
         </div>
@@ -57,20 +97,7 @@ function App() {
         <div id="docs">
           <h2>Log Your Hours</h2>
           {/* <p>Your questions, answered</p> */}
-          <ul>
-            <li>
-              {/* <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a> */}
-            </li>
-            <li>
-              {/* <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a> */}
-            </li>
-          </ul>
+          <DriveForm onAddDrive={addDrive}></DriveForm>
         </div>
         <div id="social">
           <h2>View Your Logs</h2>
