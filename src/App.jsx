@@ -50,13 +50,16 @@ function DriveForm({ onAddDrive }) {
   );
 }
 
+function DriveList({ drives }) {
+  return (
+    <ul>
+      {drives.map((drive) => <li id={drive.id}>Date: {drive.date} Hours: {drive.hours} {drive.isNight ? 'Night' : 'Day'}</li>)}
+    </ul>
+  );
+}
+
 function App() {
-  const [drives, setDrives] = useState(
-    [
-      { id: 1, date: new Date(), hours: 5, isNight: false },
-      { id: 2, date: new Date(), hours: 5, isNight: true },
-      { id: 3, date: new Date(), hours: 5, isNight: false }
-    ])
+  const [drives, setDrives] = useState([]);
 
   const totalHours = drives.reduce((acc, drive) => acc + drive.hours, 0);
 
@@ -64,7 +67,7 @@ function App() {
     .filter((drive) => drive.isNight)
     .reduce((acc, drive) => acc + drive.hours, 0);
 
-  const isComplete = (totalHours >= 50) && (nightHours >= 10)
+  const isComplete = (totalHours >= 50) && (nightHours >= 10);
 
   function addDrive(drive) {
     setDrives([...drives, drive]);
@@ -101,57 +104,7 @@ function App() {
         </div>
         <div id="social">
           <h2>View Your Logs</h2>
-          {/* <p>Join the Vite community</p> */}
-          <ul>
-            <li>
-              {/* <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a> */}
-            </li>
-            <li>
-              {/* <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a> */}
-            </li>
-            <li>
-              {/* <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a> */}
-            </li>
-            <li>
-              {/* <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a> */}
-            </li>
-          </ul>
+          <DriveList drives={drives}></DriveList>
         </div>
       </section>
 
